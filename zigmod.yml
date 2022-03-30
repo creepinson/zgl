@@ -1,0 +1,6 @@
+id: 4lk3yhc76qc2r3900u4fyhzwjpoys8kdiqfi60z6jc340e7n
+name: zgl
+main: zgl.zig
+license: MIT
+description: OpenGL
+root_dependencies:
