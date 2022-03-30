@@ -1277,6 +1277,43 @@ pub fn depthFunc(func: DepthFunc) void {
     checkError();
 }
 
+pub fn stencilMask(mask: u32) void {
+    c.glStencilMask(mask);
+    checkError();
+}
+
+pub const StencilFunc = enum(types.Enum) {
+    never = c.GL_NEVER,
+    less = c.GL_LESS,
+    equal = c.GL_EQUAL,
+    less_or_equal = c.GL_LEQUAL,
+    greater = c.GL_GREATER,
+    not_equal = c.GL_NOTEQUAL,
+    greator_or_equal = c.GL_GEQUAL,
+    always = c.GL_ALWAYS,
+};
+
+pub fn stencilFunc(func: StencilFunc, ref: i32, mask: u32) void {
+    c.glStencilFunc(@enumToInt(func), ref, mask);
+    checkError();
+}
+
+pub const StencilOp = enum(types.Enum) {
+    keep = c.GL_KEEP,
+    zero = c.GL_ZERO,
+    replace = c.GL_REPLACE,
+    incr = c.GL_INCR,
+    incr_wrap = c.GL_INCR_WRAP,
+    decr = c.GL_DECR,
+    decr_wrap = c.GL_DECR_WRAP,
+    invert = c.GL_INVERT,
+};
+
+pub fn stencilOp(sfail: StencilOp, dpfail: StencilOp, dppass: StencilOp) void {
+    c.glStencilOp(@enumToInt(sfail), @enumToInt(dpfail), @enumToInt(dppass));
+    checkError();
+}
+
 pub const BlendFactor = enum(types.Enum) {
     zero = c.GL_ZERO,
     one = c.GL_ONE,
@@ -1404,6 +1441,11 @@ pub const TextureUnit = enum(types.Enum) {
     texture_5 = c.GL_TEXTURE5,
     texture_6 = c.GL_TEXTURE6,
     texture_7 = c.GL_TEXTURE7,
+    _,
+
+    pub fn unit(id: types.Enum) TextureUnit {
+        return @intToEnum(TextureUnit, @enumToInt(TextureUnit.texture_0) + id);
+    }
 };
 
 pub const TextureParameter = enum(types.Enum) {
