@@ -4,3 +4,6 @@ zig-out
 *.log*
 *.env*
 !*.example*
+gyro.lock
+.gyro
+deps.zig

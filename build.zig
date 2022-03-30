@@ -7,5 +7,6 @@ pub fn build(b: *std.build.Builder) void {
     const lib = b.addStaticLibrary("zgl", "./zgl.zig");
     lib.setTarget(target);
     lib.setBuildMode(mode);
+    lib.linkSystemLibrary("epoxy");
     lib.install();
 }
